@@ -12,6 +12,8 @@ class Login extends React.Component {
       email: "",
       password: "",
       status: false,
+      token: "",
+      message: "",
     };
   }
 
@@ -23,8 +25,11 @@ class Login extends React.Component {
 
   userAuthorization = async () => {
     let result = await loginFetch(this.state.email, this.state.password);
+    const { token, email, message, login } = result;
+    localStorage.setItem("email", email);
+    localStorage.setItem("token", token);
     this.setState({
-      status: result.login,
+      status: login,
     });
   };
 
