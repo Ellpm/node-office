@@ -18,7 +18,7 @@ router.post("/vacation", async function (req, res) {
 
 router.get("/vacation", async function (req, res) {
   const user = await User.findOne({ email: req.query.user });
-  const vacations = await Vacation.find({ userId: user._id });
+  const vacations = await Vacation.find();
   await res.json({ vacations: vacations });
 });
 

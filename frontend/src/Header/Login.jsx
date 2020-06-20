@@ -25,9 +25,10 @@ class Login extends React.Component {
 
   userAuthorization = async () => {
     let result = await loginFetch(this.state.email, this.state.password);
-    const { token, email, message, login } = result;
+    const { token, email, login, id } = result;
     localStorage.setItem("email", email);
-    localStorage.setItem("token", token);
+    // localStorage.setItem("token", token);
+    localStorage.setItem("id", id);
     this.setState({
       status: login,
     });

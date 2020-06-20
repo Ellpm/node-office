@@ -44,7 +44,7 @@ router.post("/login", async function (req, res) {
 
 
 
-    res.json({ login: true, email: user.email });
+    res.json({ login: true, email: user.email, id: user._id });
   } else {
     res.json({ login: false });
   }

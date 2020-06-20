@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import {
   getVacationsFetch,
-  updateVacationFetch,
-  deleteVacationFetch,
 } from "./fetches/vacationFetch";
 import preloader from "./assets/preloader.svg";
-import "date-fns";
 import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Grid from "@material-ui/core/Grid";
-import moment from "moment";
-import TextField from "@material-ui/core/TextField";
 import Form from "./Components/Form";
 import NewForm from "./Components/NewForm";
 
@@ -23,7 +16,6 @@ export default class Home extends Component {
       isFetching: false,
       addInput: false,
     };
-
 
     this.handleChange = this.handleChange.bind(this);
     this.handleButton = this.handleButton.bind(this);
@@ -39,7 +31,6 @@ export default class Home extends Component {
       [e.target.name]: e.target.value,
     });
   }
-  
 
   getVacations = async () => {
     this.setState({

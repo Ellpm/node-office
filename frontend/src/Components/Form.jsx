@@ -29,7 +29,6 @@ export default class Form extends Component {
     });
   }
   updateVacation = async (vacation) => {
-    // this.props.toggleFetch();
     // if (this.state.startDate || this.state.startDate) {
     let result = await updateVacationFetch(
       localStorage.getItem("email"),
