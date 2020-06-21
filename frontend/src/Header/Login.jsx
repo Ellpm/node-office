@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { addUser } from "../redux/action";
 import { withRouter } from "react-router-dom";
 import { loginFetch } from "../fetches/loginFetch";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,7 +45,7 @@ class Login extends React.Component {
     return (
       <>
         <div>
-          <input
+          <TextField
             required
             type="email"
             name="email"
@@ -51,30 +53,32 @@ class Login extends React.Component {
             onChange={(e) => this.createData(e)}
           />
 
-          <input
+          <TextField
             required
             type="password"
             name="password"
             placeholder="Password"
             onChange={(e) => this.createData(e)}
           />
-        </div>
 
-        <button
-          onClick={async () => {
-            await this.userAuthorization();
-            if (this.state.status) {
-              this.props.addUser(this.state.email);
-              localStorage.setItem("email", this.state.email);
-              this.props.history.push(`/`);
-            } else {
-              document.querySelector(".log").innerHTML +=
-                "<b>Неверные данные</b>";
-            }
-          }}
-        >
-          Войти
-        </button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={async () => {
+              await this.userAuthorization();
+              if (this.state.status) {
+                this.props.addUser(this.state.email);
+                localStorage.setItem("email", this.state.email);
+                this.props.history.push(`/`);
+              } else {
+                document.querySelector(".log").innerHTML +=
+                  "<b>Неверные данные</b>";
+              }
+            }}
+          >
+            Войти
+          </Button>
+        </div>
       </>
     );
   }

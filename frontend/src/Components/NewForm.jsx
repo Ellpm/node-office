@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import { addVacationFetch } from "../fetches/vacationFetch";
+import Box from "@material-ui/core/Box";
 
 export default class Form extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class Form extends Component {
     });
   }
   addVacation = async () => {
-    let result = await addVacationFetch(
+    await addVacationFetch(
       localStorage.getItem("email"),
       this.state.startDate,
       this.state.finishDate
@@ -34,7 +34,7 @@ export default class Form extends Component {
 
   render() {
     return (
-      <Grid direction="row">
+      <Box direction="row">
         <TextField
           required
           label="Начало отпуска"
@@ -58,13 +58,14 @@ export default class Form extends Component {
           }}
         />
         <Button
+          variant="contained" color="primary"
           onClick={() => {
             this.addVacation();
           }}
         >
           Добавить
         </Button>
-      </Grid>
+      </Box>
     );
   }
 }

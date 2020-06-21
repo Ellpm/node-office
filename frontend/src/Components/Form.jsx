@@ -4,10 +4,9 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Box from "@material-ui/core/Box";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
-import Fix from "./Fix"
-import Change from './Change'
+import Fix from "./Fix";
+import Change from "./Change";
 import {
-  getVacationsFetch,
   updateVacationFetch,
   deleteVacationFetch,
 } from "../fetches/vacationFetch";
@@ -23,8 +22,6 @@ export default class Form extends Component {
     this.deleteVacation = this.deleteVacation.bind(this);
     this.updateVacation = this.updateVacation.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
-    
   }
   handleChange(e) {
     this.setState({
@@ -45,18 +42,15 @@ export default class Form extends Component {
       startDate: "",
       finishDate: "",
     });
-     setTimeout(() => {
+    setTimeout(() => {
       this.props.getVacations();
     }, 1000);
     console.log(vacation._id);
   };
 
   deleteVacation = async (vacation) => {
-    let result = await deleteVacationFetch(
-      localStorage.getItem("email"),
-      vacation
-    );
-     setTimeout(() => {
+    await deleteVacationFetch(localStorage.getItem("email"), vacation);
+    setTimeout(() => {
       this.props.getVacations();
     }, 1000);
   };
@@ -97,6 +91,8 @@ export default class Form extends Component {
             {!vacation.blocked && !this.props.readonly ? (
               <ButtonGroup>
                 <Button
+                  variant="contained"
+                  color="primary"
                   onClick={() => {
                     this.updateVacation(vacation);
                   }}
@@ -104,6 +100,8 @@ export default class Form extends Component {
                   Изменить
                 </Button>
                 <Button
+                  variant="contained"
+                  color="primary"
                   onClick={() => {
                     this.deleteVacation(vacation);
                   }}
@@ -111,11 +109,12 @@ export default class Form extends Component {
                   Удалить
                 </Button>
               </ButtonGroup>
-            ) : (
-              null
-            )}
+            ) : null}
 
-            <Fix vacation={this.props.vacation} getVacations={this.props.getVacations} />
+            <Fix
+              vacation={this.props.vacation}
+              getVacations={this.props.getVacations}
+            />
           </Box>
         </form>
       </div>

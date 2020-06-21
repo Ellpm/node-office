@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { addUser } from "../redux/action";
 import { connect } from "react-redux";
+import './Header.css'
 
 class Header extends Component {
   constructor(props) {
@@ -26,11 +27,6 @@ class Header extends Component {
         <div>
           {storage ? (
             <div>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
                   <Link
                     to="/"
                     onClick={() => {
@@ -40,19 +36,11 @@ class Header extends Component {
                   >
                     Logout
                   </Link>
-                </li>
-              </ul>
             </div>
           ) : (
-            <div>
-              <ul>
-                <li>
-                  <Link to="/registration">Registration</Link>
-                </li>
-                <li>
+            <div className="nav">              
+                  <Link to="/registration">Registration</Link>         
                   <Link to="/login">Login</Link>
-                </li>
-              </ul>
             </div>
           )}
         </div>

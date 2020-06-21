@@ -6,28 +6,34 @@ export default class Fix extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      render: true
+      render: true,
     };
   }
 
   fixVacation = async (vacation) => {
-    let result = await updateVacationFetch(
+    await updateVacationFetch(
       localStorage.getItem("email"),
       vacation,
       vacation.startDate,
       vacation.finishDate,
       true
-      );
-      this.setState({render:false})
+    );
+    this.setState({ render: false });
   };
 
   render() {
     const role = localStorage.getItem("role");
     const { vacation } = this.props;
 
-    if (role == "admin" && vacation.blocked === false && this.state.render === true) {
+    if (
+      role == "admin" &&
+      vacation.blocked === false &&
+      this.state.render === true
+    ) {
       return (
         <Button
+          variant="contained"
+          color="primary"
           onClick={() => {
             this.fixVacation(vacation);
           }}

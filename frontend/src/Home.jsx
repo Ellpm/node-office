@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Form from "./Components/Form";
 import NewForm from "./Components/NewForm";
 import ViewVacations from "./Components/ViewVacations";
+import "./Home.css"
 
 export default class Home extends Component {
   constructor(props) {
@@ -46,19 +47,23 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    setTimeout(() => {this.getVacations()}, 1000)
-    
+    setTimeout(() => {
+      this.getVacations();
+    }, 1000);
   }
 
   render() {
-
-
-    
     const userId = localStorage.getItem("id");
     return (
       <>
-        <div>Здраствуйте, {localStorage.getItem("firstName")}</div>
-        <Button onClick={() => this.handleButton()}>
+        <div className="hi">
+          Здраствуйте, {localStorage.getItem("firstName")}
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => this.handleButton()}
+        >
           Добавить планируемый отпуск
         </Button>
         <br />
@@ -67,7 +72,7 @@ export default class Home extends Component {
         ) : (
           <br />
         )}
-        <p>Ваши отпуска:</p>
+        <h3>Ваши отпуска:</h3>
         {this.state.isFetching ? (
           this.state.vacations
             .filter((vacation) => vacation.userId === userId)

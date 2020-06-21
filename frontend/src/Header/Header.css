@@ -1,0 +1,14 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+a {
+  margin-top: 1em;
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color:rgb(83, 83, 238);
+  border-bottom: 1px solid rgba(15, 122, 252, 0.2);
+
+}

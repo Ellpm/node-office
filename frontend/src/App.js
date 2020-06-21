@@ -1,17 +1,13 @@
 import React from "react";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import Header from "./Header/Header";
 import Registration from "./Header/Registration";
 import "./App.css";
 import { connect } from "react-redux";
-import Login from "./Header/Login"
-import Home from "./Home"
+import Login from "./Header/Login";
+import Home from "./Home";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const storage = localStorage.getItem("email");
     return (
@@ -31,7 +27,7 @@ class App extends React.Component {
               <>
                 <Route exact path="/">
                   <Home />
-                </Route>                
+                </Route>
               </>
             ) : (
               <Redirect to="/login" />
@@ -46,9 +42,6 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   email: state.email,
 });
-const mapDispatchToProps = {
-  
-};
+const mapDispatchToProps = {};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
-
