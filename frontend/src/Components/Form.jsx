@@ -45,7 +45,9 @@ export default class Form extends Component {
       startDate: "",
       finishDate: "",
     });
-    this.props.getVacations();
+     setTimeout(() => {
+      this.props.getVacations();
+    }, 1000);
     console.log(vacation._id);
   };
 
@@ -54,7 +56,9 @@ export default class Form extends Component {
       localStorage.getItem("email"),
       vacation
     );
-    this.props.getVacations();
+     setTimeout(() => {
+      this.props.getVacations();
+    }, 1000);
   };
 
   render() {

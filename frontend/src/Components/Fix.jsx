@@ -5,8 +5,9 @@ import { updateVacationFetch } from "../fetches/vacationFetch";
 export default class Fix extends Component {
   constructor(props) {
     super(props);
-
-
+    this.state = {
+      render: true
+    };
   }
 
   fixVacation = async (vacation) => {
@@ -16,16 +17,15 @@ export default class Fix extends Component {
       vacation.startDate,
       vacation.finishDate,
       true
-    );
-  
+      );
+      this.setState({render:false})
   };
 
   render() {
-    
     const role = localStorage.getItem("role");
     const { vacation } = this.props;
 
-    if (role == "admin" && vacation.blocked === false) {
+    if (role == "admin" && vacation.blocked === false && this.state.render === true) {
       return (
         <Button
           onClick={() => {

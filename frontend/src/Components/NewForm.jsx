@@ -27,7 +27,9 @@ export default class Form extends Component {
       this.state.startDate,
       this.state.finishDate
     );
-    this.props.getVacations();
+    setTimeout(() => {
+      this.props.getVacations();
+    }, 1000);
   };
 
   render() {

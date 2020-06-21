@@ -46,7 +46,8 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    this.getVacations();
+    setTimeout(() => {this.getVacations()}, 1000)
+    
   }
 
   render() {
