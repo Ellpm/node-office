@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
+import Fix from "./Fix"
+import Change from './Change'
 import {
   getVacationsFetch,
   updateVacationFetch,
@@ -21,6 +23,7 @@ export default class Form extends Component {
     this.deleteVacation = this.deleteVacation.bind(this);
     this.updateVacation = this.updateVacation.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
     
   }
   handleChange(e) {
@@ -34,7 +37,8 @@ export default class Form extends Component {
       localStorage.getItem("email"),
       vacation,
       this.state.startDate,
-      this.state.finishDate
+      this.state.finishDate,
+      vacation.blocked
     );
     this.setState({
       vacations: result.vacations,
@@ -56,57 +60,61 @@ export default class Form extends Component {
   render() {
     const { vacation, index } = this.props;
     return (
-      <form key={index} id={vacation._id}>
-        <Grid direction="row">
-          <p>{index + 1}</p>
-          <TextField
-            id={vacation._id}
-            label="Начало отпуска"
-            type="date"
-            defaultValue={moment(vacation.startDate).format(
-              "YYYY-MM-DD"
+      <div>
+        <Change
+          readonly={this.props.readonly}
+          firstName={this.props.firstName}
+          lastName={this.props.lastName}
+        />
+        <form key={index} id={vacation._id}>
+          <Box direction="row">
+            <TextField
+              id={vacation._id}
+              label="Начало отпуска"
+              type="date"
+              defaultValue={moment(vacation.startDate).format("YYYY-MM-DD")}
+              onChange={this.handleChange}
+              name="startDate"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id={vacation._id}
+              label="Окончание отпуска"
+              type="date"
+              defaultValue={moment(vacation.finishDate).format("YYYY-MM-DD")}
+              onChange={this.handleChange}
+              name="finishDate"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            {!vacation.blocked && !this.props.readonly ? (
+              <ButtonGroup>
+                <Button
+                  onClick={() => {
+                    this.updateVacation(vacation);
+                  }}
+                >
+                  Изменить
+                </Button>
+                <Button
+                  onClick={() => {
+                    this.deleteVacation(vacation);
+                  }}
+                >
+                  Удалить
+                </Button>
+              </ButtonGroup>
+            ) : (
+              null
             )}
-            onChange={this.handleChange}
-            name="startDate"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id={vacation._id}
-            label="Окончание отпуска"
-            type="date"
-            defaultValue={moment(vacation.finishDate).format(
-              "YYYY-MM-DD"
-            )}
-            onChange={this.handleChange}
-            name="finishDate"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          {!vacation.blocked ? (
-            <ButtonGroup>
-              <Button
-                onClick={() => {
-                  this.updateVacation(vacation);
-                }}
-              >
-                Изменить
-              </Button>
-              <Button
-                onClick={() => {
-                  this.deleteVacation(vacation);
-                }}
-              >
-                Удалить
-              </Button>
-            </ButtonGroup>
-          ) : (
-            <p>Даты нельзя поменять</p>
-          )}
-        </Grid>
-      </form>
+
+            <Fix vacation={this.props.vacation} getVacations={this.props.getVacations} />
+          </Box>
+        </form>
+      </div>
     );
   }
 }

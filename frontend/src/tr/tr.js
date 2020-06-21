@@ -45,3 +45,13 @@
     )}
   </Grid>
 </form>;
+
+
+for (let index = 0; index < vacations.length; index++) {
+  const user = await users.find((item) => item._id === vacations[index].userId);
+  console.log(await user);
+  Object.assign(vacations[index], user.firstName, user.lastName);
+  console.log(vacations[index]);
+
+  newVac.push(vacations[index]);
+}

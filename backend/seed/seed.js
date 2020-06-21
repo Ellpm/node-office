@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 mongoose.pluralize(null);
 const User = require("../models/user");
 const Vacation = require("../models/vacation");
+const faker = require("faker/locale/ru");
 
 function randomDate(param) {
   return Math.floor(Math.random() * param);
@@ -25,15 +26,17 @@ async function createBase() {
     
 
     const newUser = await User.create({
+      firstName: await faker.name.firstName(),
+      lastName: await faker.name.lastName(),
       email: indexUser,
       password: passwordHash,
       role: role,
     });
 
-    const randomMonth = randomDate(11);
-    const randomDay = randomDate(23);
-for (let indexVacation = 0; indexVacation < 4; indexVacation++) {
-  let blocked = indexVacation % 2 ? true : false;
+    for (let indexVacation = 0; indexVacation < 4; indexVacation++) {
+      const blocked = indexVacation % 2 ? true : false;
+      const randomMonth = randomDate(11);
+      const randomDay = randomDate(23);
 
   await Vacation.create({
     startDate: new Date(2020, randomMonth, randomDay),

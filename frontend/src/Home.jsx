@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import {
-  getVacationsFetch,
-} from "./fetches/vacationFetch";
+import { getVacationsFetch } from "./fetches/vacationFetch";
 import preloader from "./assets/preloader.svg";
 import Button from "@material-ui/core/Button";
 import Form from "./Components/Form";
 import NewForm from "./Components/NewForm";
+import ViewVacations from "./Components/ViewVacations";
 
 export default class Home extends Component {
   constructor(props) {
@@ -51,9 +50,13 @@ export default class Home extends Component {
   }
 
   render() {
+
+
+    
+    const userId = localStorage.getItem("id");
     return (
       <>
-        <div>Здраствуйте, {localStorage.getItem("email")}</div>
+        <div>Здраствуйте, {localStorage.getItem("firstName")}</div>
         <Button onClick={() => this.handleButton()}>
           Добавить планируемый отпуск
         </Button>
@@ -65,17 +68,20 @@ export default class Home extends Component {
         )}
         <p>Ваши отпуска:</p>
         {this.state.isFetching ? (
-          this.state.vacations.map((vacation, index) => (
-            <Form
-              vacation={vacation}
-              index={index}
-              key={index}
-              getVacations={this.getVacations}
-            />
-          ))
+          this.state.vacations
+            .filter((vacation) => vacation.userId === userId)
+            .map((vacation, index) => (
+              <Form
+                vacation={vacation}
+                index={index}
+                key={index}
+                getVacations={this.getVacations}
+              />
+            ))
         ) : (
           <img src={preloader} />
         )}
+        <ViewVacations userId={userId} vacations={this.state.vacations} />
       </>
     );
   }

@@ -31,7 +31,8 @@ export const updateVacationFetch = async (
   email,
   vacation,
   startDate,
-  finishDate
+  finishDate,
+  blocked
 ) => {
   let response = await fetch(path, {
     method: "PUT",
@@ -43,6 +44,7 @@ export const updateVacationFetch = async (
       vacationId: vacation._id,
       startDate: startDate ? new Date(startDate) : vacation.startDate,
       finishDate: finishDate ? new Date(finishDate) : vacation.finishDate,
+      blocked: blocked
     }),
   });
   let result = await response.json();
@@ -65,5 +67,6 @@ export const deleteVacationFetch = async (email, vacation) => {
   let result = await response.json();
   return result;
 };
+
 
 
