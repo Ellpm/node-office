@@ -68,6 +68,7 @@ export default class Form extends Component {
           <Box direction="row">
             <TextField
               id={vacation._id}
+              disabled={this.props.disabled}
               label="Начало отпуска"
               type="date"
               defaultValue={moment(vacation.startDate).format("YYYY-MM-DD")}
@@ -79,6 +80,7 @@ export default class Form extends Component {
             />
             <TextField
               id={vacation._id}
+              disabled={this.props.disabled}
               label="Окончание отпуска"
               type="date"
               defaultValue={moment(vacation.finishDate).format("YYYY-MM-DD")}

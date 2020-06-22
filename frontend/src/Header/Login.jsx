@@ -29,9 +29,7 @@ class Login extends React.Component {
     let result = await loginFetch(this.state.email, this.state.password);
     const { email, _id, firstName, lastName, role } = result.user;
     localStorage.setItem("email", email);
-    // localStorage.setItem("token", token);
     localStorage.setItem("id", _id);
-    localStorage.setItem("user", result.user);
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
     localStorage.setItem("role", role);

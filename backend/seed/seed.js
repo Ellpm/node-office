@@ -23,7 +23,6 @@ async function createBase() {
   for (let indexUser = 0; indexUser < 10; indexUser++) {
     let passwordHash = await bcrypt.hash(String(indexUser), saltRounds);
     let role = indexUser === 0 ? "admin" : "employee";
-    
 
     const newUser = await User.create({
       firstName: await faker.name.firstName(),
@@ -38,13 +37,13 @@ async function createBase() {
       const randomMonth = randomDate(11);
       const randomDay = randomDate(23);
 
-  await Vacation.create({
-    startDate: new Date(2020, randomMonth, randomDay),
-    finishDate: new Date(2020, randomMonth, randomDay + 7),
-    userId: newUser._id,
-    blocked: blocked,
-  });  
-}
+      await Vacation.create({
+        startDate: new Date(2020, randomMonth, randomDay),
+        finishDate: new Date(2020, randomMonth, randomDay + 7),
+        userId: newUser._id,
+        blocked: blocked,
+      });
+    }
   }
 
   await mongoose.disconnect();

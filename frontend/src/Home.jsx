@@ -82,6 +82,7 @@ export default class Home extends Component {
                 index={index}
                 key={index}
                 getVacations={this.getVacations}
+                disabled={vacation.blocked}
               />
             ))
         ) : (

@@ -30,7 +30,7 @@ router.get("/vacation", async function (req, res) {
     };
     return newOb;
   });
-Promise.all(newVacations).then((items) => {
+  Promise.all(newVacations).then((items) => {
     res.json({ vacations: items });
   });
 });
@@ -44,7 +44,7 @@ router.put("/vacation", async function (req, res) {
       {
         startDate: req.body.startDate,
         finishDate: req.body.finishDate,
-        blocked: req.body.blocked
+        blocked: req.body.blocked,
       },
       async function (err, updatedVacantion) {
         if (err) return res.json({ error: "404" });

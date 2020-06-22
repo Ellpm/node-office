@@ -9,7 +9,7 @@ const FileStore = require("session-file-store")(session);
 const cors = require("cors");
 const mongoose = require("mongoose");
 const indexRouter = require("./routes/index");
-const vacationRouter = require('./routes/vacation')
+const vacationRouter = require("./routes/vacation");
 mongoose.connect("mongodb://localhost:27017/office", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -55,7 +55,6 @@ app.use(async function (req, res, next) {
   app.locals.user = await req.session.user;
   next();
   console.log(await app.locals.user);
-  
 });
 
 app.use("/", indexRouter);
@@ -64,6 +63,5 @@ app.use("/vacation", vacationRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
 
 module.exports = app;

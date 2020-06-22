@@ -12,6 +12,7 @@ export default class ViewVacations extends Component {
           .map((vacation, key) => (
             <Form
               readonly="true"
+              disabled="true"
               vacation={vacation}
               index={key}
               key={key}
