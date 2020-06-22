@@ -4,14 +4,12 @@ import { connect } from "react-redux";
 import "./ViewVacations.css";
 
 class ViewVacations extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <div className="container">
         {this.props.vacations
-          .filter((vacation) => vacation.userId !== this.props.userId)
+          .filter((vacation) => vacation.userId !== this.props.userId).reverse()
           .map((vacation, key) => (
             <Form
               readonly={true}

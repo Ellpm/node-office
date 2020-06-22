@@ -16,11 +16,9 @@ export const addVacationFetch = async (email, startDate, finishDate) => {
   return result;
 };
 
-export const getVacationsFetch = async () => {
-
-  console.log("fetch email", localStorage.getItem("email"));
+export const getVacationsFetch = async (email) => {
   
-  let response = await fetch(`${path}?user=${localStorage.getItem("email")}`, {
+  let response = await fetch(`${path}?user=${email}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

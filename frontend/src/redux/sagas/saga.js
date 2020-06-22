@@ -7,7 +7,7 @@ import { getVacationsFetch } from "../../fetches/vacationFetch";
 
 function* fetchSagaGetData(payload) {
   try {
-    const vacations = yield call(getVacationsFetch);
+    const vacations = yield call(getVacationsFetch, payload.email);
     yield put(getBase(vacations));
   } catch (e) {
     console.log(e);

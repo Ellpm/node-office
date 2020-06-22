@@ -31,19 +31,26 @@ class Form extends Component {
     });
   }
   updateVacation = async (vacation) => {
-    // if (this.state.startDate || this.state.startDate) {
-    await updateVacationFetch(
-      localStorage.getItem("email"),
-      vacation,
-      this.state.startDate,
-      this.state.finishDate,
-      vacation.blocked
-    );
-    this.setState({
-      startDate: "",
-      finishDate: "",
-    });
-    this.props.getBaseSaga();
+
+
+
+    
+    if (this.state.startDate || this.state.startDate) {
+if (Date())
+
+      await updateVacationFetch(
+        localStorage.getItem("email"),
+        vacation,
+        this.state.startDate,
+        this.state.finishDate,
+        vacation.blocked
+      );
+      this.setState({
+        startDate: "",
+        finishDate: "",
+      });
+      this.props.getBaseSaga();
+    }
   };
 
   deleteVacation = async (vacation) => {
@@ -116,8 +123,6 @@ class Form extends Component {
     );
   }
 }
-
-
 
 const mapDispatchToProps = {
   getBaseSaga,

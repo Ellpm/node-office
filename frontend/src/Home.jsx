@@ -59,7 +59,7 @@ class Home extends Component {
           <>
             <div>
               {this.props.vacations
-                .filter((vacation) => vacation.userId === userId)
+                .filter((vacation) => vacation.userId === userId).reverse()
                 .map((vacation, index) => (
                   <Form
                     vacation={vacation}
@@ -72,7 +72,7 @@ class Home extends Component {
             <ViewVacations userId={userId} />
           </>
         ) : (
-          <img src={preloader} />
+          <img src={preloader} alt="загрузка..."/>
         )}
       </>
     );

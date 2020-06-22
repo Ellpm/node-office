@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import { getBaseSaga } from "../redux/action";
 
 class Fix extends Component {
-  constructor(props) {
-    super(props);
-    
-  }
 
   fixVacation = async (vacation) => {
     await updateVacationFetch(
@@ -26,7 +22,7 @@ class Fix extends Component {
     const { vacation } = this.props;
 
     if (
-      role == "admin" &&
+      role === "admin" &&
       vacation.blocked === false 
     ) {
       return (

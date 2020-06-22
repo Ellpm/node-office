@@ -1,0 +1,10 @@
+{
+  "name": "node-office",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+  },
+  "scripts": {
+    "start": "concurrently \"(npm start --prefix frontend)\" \"(npm start --prefix backend)\""    
+  }
+}
