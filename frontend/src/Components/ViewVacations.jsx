@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import Form from "./Form";
-import "./ViewVacations.css"
+import { connect } from "react-redux";
+import "./ViewVacations.css";
 
-export default class ViewVacations extends Component {
+class ViewVacations extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="container">
-        <h3>Отпуска других сотрудников:</h3>
         {this.props.vacations
           .filter((vacation) => vacation.userId !== this.props.userId)
           .map((vacation, key) => (
             <Form
-              readonly="true"
-              disabled="true"
+              readonly={true}
+              disabled={true}
               vacation={vacation}
-              index={key}
               key={key}
               firstName={vacation.firstName}
               lastName={vacation.lastName}
@@ -24,3 +26,9 @@ export default class ViewVacations extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  vacations: state.vacations.vacations,
+});
+
+export default connect(mapStateToProps)(ViewVacations);

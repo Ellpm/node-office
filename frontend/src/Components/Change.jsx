@@ -9,7 +9,7 @@ export default class Change extends Component {
             Отпуск сотрудника {this.props.firstName} {this.props.lastName}
           </p>
         ) : (
-          <br />
+          null
         )}
       </div>
     );

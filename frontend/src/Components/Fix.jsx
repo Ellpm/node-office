@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import { updateVacationFetch } from "../fetches/vacationFetch";
+import { connect } from "react-redux";
+import { getBaseSaga } from "../redux/action";
 
-export default class Fix extends Component {
+class Fix extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      render: true,
-    };
+    
   }
 
   fixVacation = async (vacation) => {
@@ -18,7 +18,7 @@ export default class Fix extends Component {
       vacation.finishDate,
       true
     );
-    this.setState({ render: false });
+        this.props.getBaseSaga();
   };
 
   render() {
@@ -27,8 +27,7 @@ export default class Fix extends Component {
 
     if (
       role == "admin" &&
-      vacation.blocked === false &&
-      this.state.render === true
+      vacation.blocked === false 
     ) {
       return (
         <Button
@@ -44,3 +43,9 @@ export default class Fix extends Component {
     } else return null;
   }
 }
+
+
+const mapDispatchToProps = {
+  getBaseSaga,
+};
+export default connect(null, mapDispatchToProps)(Fix);

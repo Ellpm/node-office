@@ -14,8 +14,6 @@ class Login extends React.Component {
       email: "",
       password: "",
       status: false,
-      token: "",
-      message: "",
     };
   }
 

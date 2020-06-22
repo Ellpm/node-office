@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+import { getBaseSaga } from "../redux/action";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import Fix from "./Fix";
@@ -11,7 +13,7 @@ import {
   deleteVacationFetch,
 } from "../fetches/vacationFetch";
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +32,7 @@ export default class Form extends Component {
   }
   updateVacation = async (vacation) => {
     // if (this.state.startDate || this.state.startDate) {
-    let result = await updateVacationFetch(
+    await updateVacationFetch(
       localStorage.getItem("email"),
       vacation,
       this.state.startDate,
@@ -38,21 +40,15 @@ export default class Form extends Component {
       vacation.blocked
     );
     this.setState({
-      vacations: result.vacations,
       startDate: "",
       finishDate: "",
     });
-    setTimeout(() => {
-      this.props.getVacations();
-    }, 1000);
-    console.log(vacation._id);
+    this.props.getBaseSaga();
   };
 
   deleteVacation = async (vacation) => {
     await deleteVacationFetch(localStorage.getItem("email"), vacation);
-    setTimeout(() => {
-      this.props.getVacations();
-    }, 1000);
+    this.props.getBaseSaga();
   };
 
   render() {
@@ -91,7 +87,7 @@ export default class Form extends Component {
               }}
             />
             {!vacation.blocked && !this.props.readonly ? (
-              <ButtonGroup>
+              <ButtonGroup hidden={vacation.blocked}>
                 <Button
                   variant="contained"
                   color="primary"
@@ -113,13 +109,17 @@ export default class Form extends Component {
               </ButtonGroup>
             ) : null}
 
-            <Fix
-              vacation={this.props.vacation}
-              getVacations={this.props.getVacations}
-            />
+            <Fix vacation={this.props.vacation} />
           </Box>
         </form>
       </div>
     );
   }
 }
+
+
+
+const mapDispatchToProps = {
+  getBaseSaga,
+};
+export default connect(null, mapDispatchToProps)(Form);

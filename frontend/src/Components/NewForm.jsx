@@ -4,8 +4,10 @@ import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import { addVacationFetch } from "../fetches/vacationFetch";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+import { getBaseSaga } from "../redux/action";
 
-export default class Form extends Component {
+class NewForm extends Component {
   constructor(props) {
     super(props);
 
@@ -21,15 +23,13 @@ export default class Form extends Component {
       [e.target.name]: e.target.value,
     });
   }
-  addVacation = async () => {
+  addVacation = async () => {    
     await addVacationFetch(
       localStorage.getItem("email"),
       this.state.startDate,
       this.state.finishDate
     );
-    setTimeout(() => {
-      this.props.getVacations();
-    }, 1000);
+      this.props.getBaseSaga();
   };
 
   render() {
@@ -69,3 +69,9 @@ export default class Form extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  getBaseSaga,
+};
+
+export default connect(null, mapDispatchToProps)(NewForm);
